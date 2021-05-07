@@ -10,7 +10,6 @@ from sudoku_solver.sudoku_solver import (
     vertical_rule_allowed,
 )
 from tests import fixtures as fx
-from tests.fixtures import examples_supplier  # noqa: F401
 
 
 @pytest.mark.parametrize('task, solution', fx.examples)
@@ -36,8 +35,11 @@ functions = {
 }
 
 
-def test_all_allowed(examples_supplier):  # noqa: F811, WPS442
+@pytest.mark.parametrize('task, position, allowed, rule', fx.rules)
+def test_all_allowed(task, position, allowed, rule):
     """Test total allowed functions correctness."""
-    task, position, allowed, rule = examples_supplier
     allowed_function = functions.get(rule)
-    assert allowed == allowed_function(Task(task), Position(*position))
+    if allowed != allowed_function(Task(task), Position(*position)):
+        raise ValueError(
+            '{f_name} works wrong'.format(f_name=allowed_function.__name__),
+        )

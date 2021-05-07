@@ -6,7 +6,7 @@ from pydantic import validator
 
 
 @dataclass
-class Position:
+class Position(object):
     """Storing position in solution."""
 
     row_id: int
@@ -26,7 +26,7 @@ class Position:
 
 
 @dataclass
-class Task:
+class Task(object):
     """Serializer for sudoku task."""
 
     task: List[List[int]]

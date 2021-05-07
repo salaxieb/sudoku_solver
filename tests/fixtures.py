@@ -1,6 +1,5 @@
 """Test fixtures."""
 
-import pytest
 
 task = [
     [0, 0, 0, 2, 6, 0, 7, 0, 1],
@@ -57,9 +56,3 @@ rules = [
     *[(*args, 'square') for args in allowed_square_examples],
     *[(*args, 'total') for args in allowed_total_examples],
 ]
-
-
-@pytest.yield_fixture(params=rules)
-def examples_supplier(request):
-    """Give one by one all test fixtures."""
-    return request.param

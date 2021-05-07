@@ -4,7 +4,7 @@ lint: clean
 	@flake8 tests --append-config=flake8.tests.config.ini
 
 test: clean
-	@pytest -s
+	@poetry run pytest -s
 
 clean:
 	@rm -rf .pytest_cache
@@ -13,4 +13,4 @@ clean:
 	@find . -type d -name .ipynb_checkpoints -prune -exec rm -rf {} \;
 
 call:
-	@python call.py
+	@poetry run python call.py
