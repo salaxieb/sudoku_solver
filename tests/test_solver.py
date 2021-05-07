@@ -2,14 +2,9 @@
 import pytest
 
 from sudoku_solver.datatypes import Position, Task
-from sudoku_solver.sudoku_solver import (
-    allowed_options,
-    horizontal_rule_allowed,
-    solver,
-    sub_square_rule_allowed,
-    vertical_rule_allowed,
-)
+from sudoku_solver.sudoku_solver import solver
 from tests import fixtures as fx
+from tests.exceptions import WrongSolutionError
 
 
 @pytest.mark.parametrize('task, solution', fx.examples)
@@ -24,21 +19,13 @@ def test_solver(task, solution):
             Correct solution
     """
     my_solution = solver(Task(task))
-    assert my_solution == Task(solution)
+    if my_solution != Task(solution):
+        raise WrongSolutionError('Oops, check you algorithm!')
 
 
-functions = {
-    'vertical': vertical_rule_allowed,
-    'horizontal': horizontal_rule_allowed,
-    'square': sub_square_rule_allowed,
-    'total': allowed_options,
-}
-
-
-@pytest.mark.parametrize('task, position, allowed, rule', fx.rules)
-def test_all_allowed(task, position, allowed, rule):
+@pytest.mark.parametrize('task, position, allowed, allowed_function', fx.rules)
+def test_all_allowed(task, position, allowed, allowed_function):
     """Test total allowed functions correctness."""
-    allowed_function = functions.get(rule)
     if allowed != allowed_function(Task(task), Position(*position)):
         raise ValueError(
             '{f_name} works wrong'.format(f_name=allowed_function.__name__),

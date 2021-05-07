@@ -1,7 +1,7 @@
 
 # training my python dev skill in small project
 
-trying to implement everything correctly
+trying to implement everything correctly with minimum linter ignores
 
 ```bash
 make test  # run test fixtures

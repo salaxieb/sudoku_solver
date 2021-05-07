@@ -1,7 +1,7 @@
 lint: clean
 	@mypy sudoku_solver
-	@flake8 sudoku_solver --append-config=flake8.solver.config.ini
-	@flake8 tests --append-config=flake8.tests.config.ini
+	@flake8 sudoku_solver --append-config=flake8.config.ini
+	@flake8 tests --append-config=flake8.config.ini
 
 test: clean
 	@poetry run pytest -s

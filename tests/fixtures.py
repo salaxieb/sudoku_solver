@@ -1,5 +1,9 @@
 """Test fixtures."""
 
+from sudoku_solver.sudoku_solver import (  # noqa: I001
+    allowed_options, horizontal_rule_allowed,  # noqa: I001
+    sub_square_rule_allowed, vertical_rule_allowed,  # noqa: I001
+)  # noqa: I001
 
 task = [
     [0, 0, 0, 2, 6, 0, 7, 0, 1],
@@ -51,8 +55,11 @@ allowed_total_examples = [
 ]
 
 rules = [
-    *[(*args, 'vertical') for args in allowed_vertical_examples],
-    *[(*args, 'horizontal') for args in allowed_horizontal_examples],
-    *[(*args, 'square') for args in allowed_square_examples],
-    *[(*args, 'total') for args in allowed_total_examples],
+    *[(*args, vertical_rule_allowed) for args in allowed_vertical_examples],
+    *[
+        (*args, horizontal_rule_allowed)
+        for args in allowed_horizontal_examples
+    ],
+    *[(*args, sub_square_rule_allowed) for args in allowed_square_examples],
+    *[(*args, allowed_options) for args in allowed_total_examples],
 ]
