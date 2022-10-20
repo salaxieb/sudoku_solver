@@ -1,9 +1,9 @@
 """Test fixtures."""
 
-from sudoku_solver.sudoku_solver import (  # noqa: I001
-    allowed_options, horizontal_rule_allowed,  # noqa: I001
-    sub_square_rule_allowed, vertical_rule_allowed,  # noqa: I001
-)  # noqa: I001
+from sudoku_solver.candidates import (
+    allowed_options, horizontal_rule_allowed,
+    sub_square_rule_allowed, vertical_rule_allowed,
+)
 
 task = [
     [0, 0, 0, 2, 6, 0, 7, 0, 1],
@@ -29,8 +29,37 @@ solution = [
     [7, 6, 3, 4, 1, 8, 2, 5, 9],
 ]
 
+hard_task = [
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 4, 3, 0, 2, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 6],
+    [0, 0, 0, 5, 0, 9, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 4, 1, 8],
+    [0, 0, 0, 0, 8, 1, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 5, 0],
+    [0, 4, 0, 0, 0, 0, 3, 0, 0],
+]
+
+
+non_solvable_task = [
+    [0, 0, 0, 2, 6, 8, 7, 0, 1],
+    [6, 8, 0, 0, 7, 0, 0, 9, 0],
+    [1, 9, 0, 0, 0, 4, 5, 0, 0],
+    [8, 2, 0, 1, 0, 0, 0, 4, 0],
+    [0, 0, 4, 6, 0, 2, 9, 0, 0],
+    [0, 5, 0, 0, 0, 3, 0, 2, 8],
+    [0, 0, 9, 3, 0, 0, 0, 7, 4],
+    [0, 4, 0, 0, 5, 0, 0, 3, 6],
+    [7, 0, 3, 0, 1, 8, 0, 0, 0],
+]
+
+
 examples = [
     (task, solution),
+    (solution, solution),
+    # (hard_task, None),
+    (non_solvable_task, None)
 ]
 
 

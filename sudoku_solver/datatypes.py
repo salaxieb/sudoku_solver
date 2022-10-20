@@ -17,7 +17,7 @@ class Position(object):
     digit_id: int
 
     @validator('row_id')
-    def row_id_must_be_in_limits(cls, row_id):  # noqa: N805
+    def row_id_must_be_in_limits(cls, row_id: int):
         """Validate values row_id.
 
         Parameters:
@@ -34,7 +34,7 @@ class Position(object):
         return row_id
 
     @validator('digit_id')
-    def digit_id_must_be_in_limits(cls, digit_id):  # noqa: N805
+    def digit_id_must_be_in_limits(cls, digit_id: int):
         """Validate values row_id.
 
         Parameters:
@@ -57,7 +57,7 @@ class Task(object):
 
     task: List[List[int]]
 
-    def __init__(self, task: List[List[int]]) -> None:  # noqa: WPS231
+    def __init__(self, task: List[List[int]]) -> None:
         """Values must be valid and create a copy of mutable type.
 
         Parameters:
@@ -87,7 +87,7 @@ class Task(object):
             digit: value in sudoku for given position
         """
         for row_id, row in enumerate(self.task):
-            for digit_id, digit in enumerate(row):  # noqa: WPS526
+            for digit_id, digit in enumerate(row):
                 yield Position(row_id, digit_id), digit
 
     def __repr__(self):
@@ -122,8 +122,8 @@ class Task(object):
             FixedValueError: if we try to change value, which is fixed
             ValueError: if given value not in [0, 9]
         """
-        if self.task[pos.row_id][pos.digit_id] != 0:
-            raise FixedValueError('you setting value which is fixed')
+        #if self.task[pos.row_id][pos.digit_id] != 0:
+        #    raise FixedValueError('you setting value which is fixed')
         if not isinstance(digit, int) or digit < 0 or digit > 9:
             raise ValueError('value must be integer in [0, 9]')
 
